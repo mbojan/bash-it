@@ -1,7 +1,7 @@
 cite about-plugin
 about-plugin 'R specific functions'
 
-function update-packages {
+function update-r-packages {
 	about 'update packages in .libPaths()[1] library'
 	group 'r'
 
@@ -25,5 +25,5 @@ function rstudio-start {
 	about 'start rstudio server'
 	group 'r'
 
-	service rstudio-server start
+	sudo -A service rstudio-server start
 }
