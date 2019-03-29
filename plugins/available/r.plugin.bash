@@ -25,5 +25,6 @@ function rstudio-start {
 	about 'start rstudio server'
 	group 'r'
 
-	sudo -A service rstudio-server start
+	echo Launch RStudio Server with sudo
+	sudo service rstudio-server start
 }
