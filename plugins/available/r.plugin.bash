@@ -14,6 +14,13 @@ function rpkg-update {
 	MAKE='make -j $USE_CORES' Rscript -e 'update.packages(ask=FALSE, lib=.libPaths()[1])'
 }
 
+function rpkg-update1 {
+	about 'update packages in .libPaths()[1] library'
+	group 'r'
+
+	echo Updating R packages in $(Rscript -e 'cat(.libPaths()[1])') using $USE_CORES cores
+	Rscript -e 'update.packages(ask=FALSE, lib=.libPaths()[1])'
+}
 
 function rpkg-autotest {
 	about 'launch package autocheck from testthat'
