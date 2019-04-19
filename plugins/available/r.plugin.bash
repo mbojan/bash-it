@@ -3,7 +3,7 @@ about-plugin 'R specific functions'
 
 
 function rpkg-update {
-	about 'update packages in .libPaths()[1] library'
+	about 'update packages in .libPaths()[1] library with parallel compilation'
 	group 'r'
 
 	# Get number of cores
@@ -15,11 +15,21 @@ function rpkg-update {
 }
 
 function rpkg-update1 {
-	about 'update packages in .libPaths()[1] library'
+	about 'update packages in .libPaths()[1] library using one core'
 	group 'r'
 
-	echo Updating R packages in $(Rscript -e 'cat(.libPaths()[1])') using $USE_CORES cores
 	Rscript -e 'update.packages(ask=FALSE, lib=.libPaths()[1])'
+}
+
+function rpkg-updatep {
+	about 'update packages in .libPaths()[1] library in parallel'
+	group 'r'
+
+	# Get number of cores
+	local NCORES=$(grep -c ^processor /proc/cpuinfo)
+	local USE_CORES=$(expr $NCORES - 1)
+
+	Rscript -e "update.packages(ask=FALSE, lib=.libPaths()[1], Ncpus=$USE_CORES, checkBuilt=TRUE)"
 }
 
 function rpkg-autotest {
