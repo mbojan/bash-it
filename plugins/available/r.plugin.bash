@@ -52,3 +52,9 @@ function rpkg-install {
 	MAKE="make -j$USE_CORES" Rscript -e "install.packages(\"$1\")"
 }
 
+function rpkg-old {
+	about 'check for old packages'
+	group 'r'
+
+	Rscript -e 'old.packages()'
+}
