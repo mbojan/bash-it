@@ -64,7 +64,17 @@ function rpkg-install {
 
 function rpkg-old {
 	about 'check for old packages'
+	param '1: name of Rmd file to render'
 	group 'r'
 
 	Rscript -e 'old.packages()'
 }
+
+
+function r-render {
+	about 'run rmarkdown::render() via Rscript'
+	group 'r'
+
+	Rscript -e "rmarkdown::render(\"$1\")"
+}
+
