@@ -11,7 +11,7 @@ function rpkg-update {
 	local USE_CORES=$(expr $NCORES - 1)
 
 	echo Updating R packages in $(Rscript -e 'cat(.libPaths()[1])') using $USE_CORES cores
-	MAKE='make -j $USE_CORES' Rscript -e 'update.packages(ask=FALSE, lib=.libPaths()[1])'
+	MAKE='make -j $USE_CORES' Rscript -e 'update.packages(ask=FALSE, lib=.libPaths()[1], checkBuilt=TRUE)'
 }
 
 function rpkg-update1 {
