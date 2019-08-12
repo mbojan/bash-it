@@ -1,6 +1,50 @@
 cite about-plugin
 about-plugin 'R specific functions'
 
+function rpkg-u {
+	about 'update R packages'
+	group 'r'
+
+	usage() {
+		echo ""
+		echo "Update R packages in specified library"
+		echo ""
+		echo "Usage: rpkg-u [-l <string>] [-p <integer>]" 1>&2
+		echo ""
+		echo "-l  Library path. Defaults to .libPaths()[1]"
+		echo "-p  Number of cores. Defaults to 1"
+		echo ""
+	}
+
+	while getopts ":l:p:" o; do
+		case "${o}" in
+			l)
+				local l=${OPTARG}
+				;;
+			p)
+				local p=${OPTARG}
+				;;
+			*)
+				usage
+				;;
+		esac
+	done
+	shift $((OPTIND-1))
+
+	if [ -z "${l}" ]; then
+		local l=1
+	fi
+
+	if [ -z "${p}" ]; then
+		local p=1
+	fi
+
+	echo "l = ${l}"
+	echo "p = ${p}"
+	
+	echo "MAKE='make -j${p}' Rscript -e 'update.packages(lib=.libPaths()[${l}], ask=FALSE, checkBuilt=TRUE)'"
+}
+
 
 function rpkg-update {
 	about 'update packages in .libPaths()[1] library with parallel compilation'
@@ -71,7 +115,6 @@ function rpkg-install {
 
 function rpkg-old {
 	about 'check for old packages'
-	param '1: name of Rmd file to render'
 	group 'r'
 
 	Rscript -e 'old.packages()'
@@ -80,6 +123,7 @@ function rpkg-old {
 
 function r-render {
 	about 'run rmarkdown::render() via Rscript'
+	param '1: name of Rmd file to render'
 	group 'r'
 
 	Rscript -e "rmarkdown::render(\"$1\")"
