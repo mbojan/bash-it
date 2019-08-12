@@ -21,6 +21,13 @@ function rpkg-update1 {
 	Rscript -e 'update.packages(ask=FALSE, lib=.libPaths()[1])'
 }
 
+function rpkg-update2 {
+	about 'update packages in .libPaths()[1] library using two cores'
+	group 'r'
+
+	MAKE='make -j2' Rscript -e 'update.packages(ask=FALSE, lib=.libPaths()[1])'
+}
+
 function rpkg-updatep {
 	about 'update packages in .libPaths()[1] library in parallel'
 	group 'r'
