@@ -46,6 +46,15 @@ function rpkg-u {
 }
 
 
+function rpkg-github {
+	about 'install R package from GitHub'
+	param '1: user/repo string to GH repository with the package'
+	group 'r'
+
+	Rscript -e "remotes::install_github(\"$1\", build_vignettes=TRUE, force=TRUE)"
+}
+
+
 function rpkg-update {
 	about 'update packages in .libPaths()[1] library with parallel compilation'
 	group 'r'
