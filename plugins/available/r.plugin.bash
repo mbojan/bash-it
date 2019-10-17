@@ -142,12 +142,13 @@ function r-here {
 	about 'cd to here:here()'
 	group 'r'
 
-	cd `Rscript -e 'cat(herr::here())'`
+	cd `Rscript -e 'cat(here::here())'`
 }
 
 function r-install {
 	about 'run devtools::install()'
 	group r
 
+	echo 'Running devtools::install()'
 	Rscript -e 'devtools::install()'
 }
