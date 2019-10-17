@@ -104,7 +104,7 @@ function rstudio-start {
 	about 'start rstudio server'
 	group 'r'
 
-	echo Launch RStudio Server
+	echo 'Launch RStudio Server';
 	service rstudio-server start
 }
 
@@ -138,3 +138,16 @@ function r-render {
 	Rscript -e "rmarkdown::render(\"$1\")"
 }
 
+function r-here {
+	about 'cd to here:here()'
+	group 'r'
+
+	cd `Rscript -e 'cat(herr::here())'`
+}
+
+function r-install {
+	about 'run devtools::install()'
+	group r
+
+	Rscript -e 'devtools::install()'
+}
