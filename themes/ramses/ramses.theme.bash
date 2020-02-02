@@ -86,17 +86,24 @@ prompt() {
 
     # nice prompt
     case "`id -u`" in
-        0) PS1="${TITLEBAR}┌─$(my_ve)$(chroot)[$my_ps_root][$my_ps_host_root]$(modern_scm_prompt)$(__my_rvm_ruby_version)[${cyan}\w${normal}]$(is_vim_shell)
-└─▪ "
+        0) PS1="${TITLEBAR}┌─$(my_ve)$(chroot)[$my_ps_root][$my_ps_host_root]$(modern_scm_prompt)$(__my_rvm_ruby_version)[${cyan}\w${normal}]
+▪ "
         ;;
-        *) PS1="${TITLEBAR}┌─$(my_ve)$(chroot)[$my_ps_user][$my_ps_host]$(modern_scm_prompt)$(__my_rvm_ruby_version)[${cyan}\w${normal}]$(is_vim_shell)
-└─▪ "
+        *) PS1="${TITLEBAR}┌─$(my_ve)$(chroot)[$my_ps_user][$my_ps_host]$(modern_scm_prompt)$(__my_rvm_ruby_version)
+|─[${bold_purple}\w${normal}]
+▪ "
         ;;
     esac
 }
 
-PS2="└─▪ "
+PS2="▪ "
 
-
+# vi mode
+set -o vi
+bind 'set vi-ins-mode-string "└+"'
+bind 'set vi-cmd-mode-string "└─"'
+bind 'set show-mode-in-prompt on'
+bind '"jj":vi-movement-mode'
+VIMRUNTIME='true'
 
 safe_append_prompt_command prompt
