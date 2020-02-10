@@ -54,9 +54,9 @@ radmin-update() (
 		esac
 	done
 
-	echo "Updating packages in 1:$(Rscript -e "cat(.libPaths()[${LIBINDEX}])") using ${CORES} core(s)."
+	echo "Updating packages in ${LIBINDEX}:$(Rscript -e "cat(.libPaths()[${LIBINDEX}])") using ${CORES} core(s)."
 	read -n 2 -p "Press any key to continue"
-	MAKE="make -j${p}" Rscript -e "update.packages(lib=.libPaths()[${LIBINDEX}], ask=FALSE, checkBuilt=TRUE)"
+	MAKE="make -j${CORES}" Rscript -e "update.packages(lib=.libPaths()[${LIBINDEX}], ask=FALSE, checkBuilt=TRUE)"
 )
 
 function radmin-install {
