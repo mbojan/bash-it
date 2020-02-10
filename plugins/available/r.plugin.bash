@@ -6,7 +6,7 @@ about-plugin 'R specific functions'
 #
 # Package management and so on.
 
-function radmin-update {
+radmin-update() (
 	about 'update R packages'
 	group 'r'
 
@@ -23,29 +23,41 @@ function radmin-update {
 		echo ""
 	}
 
-	# Default option values
-	local l=1
-	local p=1
-	echo $*
+	exit_abnormal() {
+		usage
+		return 1
+	}
 
-	while getopts ":l:p:h" o; do
+	# Default option values
+	local LIBINDEX=1
+	local CORES=1
+
+	while getopts ":hl:p:" o; do
 		case "${o}" in
-			l) local l=${OPTARG} ;;
-			p) local p=${OPTARG} ;;
+			l) 
+				LIBINDEX=${OPTARG} 
+				;;
+			p) 
+				CORES=${OPTARG} 
+				;;
 			h) 
 				usage 
-				exit 0;;
+				return 0
+				;;
+			:)
+				echo "Error: -${OPTARG} requires and argument."
+				exit_abnormal
+				;;
 			*)
-				usage
-				exit 1;;
+				exit_abnormal
+				;;
 		esac
 	done
-	shift $((OPTIND - 1))
 
-	echo "Updating packages in 1:$(Rscript -e "cat(.libPaths()[${l}])") using ${p} core(s)."
+	echo "Updating packages in 1:$(Rscript -e "cat(.libPaths()[${LIBINDEX}])") using ${CORES} core(s)."
 	read -n 2 -p "Press any key to continue"
-	MAKE="make -j${p}" Rscript -e "update.packages(lib=.libPaths()[${l}], ask=FALSE, checkBuilt=TRUE)"
-}
+	MAKE="make -j${p}" Rscript -e "update.packages(lib=.libPaths()[${LIBINDEX}], ask=FALSE, checkBuilt=TRUE)"
+)
 
 function radmin-install {
 	about 'install R package parallelled'
