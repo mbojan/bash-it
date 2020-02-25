@@ -31,14 +31,18 @@ radmin-update() (
 	# Default option values
 	local LIBINDEX=1
 	local CORES=1
+	local SUDO=
 
-	while getopts ":hl:p:" o; do
+	while getopts ":hsl:p:" o; do
 		case "${o}" in
 			l) 
 				LIBINDEX=${OPTARG} 
 				;;
 			p) 
 				CORES=${OPTARG} 
+				;;
+			s)
+				SUDO=sudo
 				;;
 			h) 
 				usage 
@@ -56,7 +60,7 @@ radmin-update() (
 
 	echo "Updating packages in ${LIBINDEX}:$(Rscript -e "cat(.libPaths()[${LIBINDEX}])") using ${CORES} core(s)."
 	read -n 2 -p "Press any key to continue"
-	MAKE="make -j${CORES}" Rscript -e "update.packages(lib=.libPaths()[${LIBINDEX}], ask=FALSE, checkBuilt=TRUE)"
+	MAKE="make -j${CORES}" ${SUDO} Rscript -e "update.packages(lib=.libPaths()[${LIBINDEX}], ask=FALSE, checkBuilt=TRUE)"
 )
 
 function radmin-install {
