@@ -92,6 +92,13 @@ function radmin-oldpkg {
 	Rscript -e 'old.packages()'
 }
 
+function radmin-updatep {
+	about 'update packages in parallel'
+	group 'r'
+
+	Rscript -e 'update.packages(lib=.libPaths()[1], ask=FALSE, Ncpus=4)'
+}
+
 
 
 
