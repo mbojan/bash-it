@@ -7,7 +7,7 @@ about-plugin 'R specific functions'
 # Package management and so on.
 
 radmin-update() (
-	about 'update R packages'
+	about 'update R packages with parallel compilation'
 	group 'r'
 
 	usage() {
