@@ -18,9 +18,7 @@ function __powerline_user_info_prompt {
   local color=${USER_INFO_THEME_PROMPT_COLOR}
 
   if [[ "${THEME_CHECK_SUDO}" = true ]]; then
-    if sudo -n uptime 2>&1 | grep -q "load"; then
-      color=${USER_INFO_THEME_PROMPT_COLOR_SUDO}
-    fi
+    sudo -vn 1>/dev/null 2>&1 && color=${USER_INFO_THEME_PROMPT_COLOR_SUDO}
   fi
 
   case "${POWERLINE_PROMPT_USER_INFO_MODE}" in
@@ -39,6 +37,15 @@ function __powerline_user_info_prompt {
       ;;
   esac
   [[ -n "${user_info}" ]] && echo "${user_info}|${color}"
+}
+
+function __powerline_terraform_prompt {
+  local terraform_workspace=""
+
+  if [ -d .terraform ]; then
+    terraform_workspace="$(terraform_workspace_prompt)"
+    [[ -n "${terraform_workspace}" ]] && echo "${TERRAFORM_CHAR}${terraform_workspace}|${TERRAFORM_THEME_PROMPT_COLOR}"
+  fi
 }
 
 function __powerline_node_prompt {

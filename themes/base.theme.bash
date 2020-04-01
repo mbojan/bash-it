@@ -68,6 +68,8 @@ NVM_THEME_PROMPT_SUFFIX='|'
 RVM_THEME_PROMPT_PREFIX=' |'
 RVM_THEME_PROMPT_SUFFIX='|'
 
+THEME_SHOW_RUBY_PROMPT=${THEME_SHOW_RUBY_PROMPT:=true}
+
 THEME_SHOW_USER_HOST=${THEME_SHOW_USER_HOST:=false}
 USER_HOST_THEME_PROMPT_PREFIX=''
 USER_HOST_THEME_PROMPT_SUFFIX=''
@@ -153,6 +155,14 @@ function scm_prompt_info_common {
   { [[ ${SCM} == ${SCM_P4} ]] && p4_prompt_info && return; } || true
   { [[ ${SCM} == ${SCM_HG} ]] && hg_prompt_info && return; } || true
   { [[ ${SCM} == ${SCM_SVN} ]] && svn_prompt_info && return; } || true
+}
+
+function terraform_workspace_prompt {
+    if _command_exists terraform ; then
+        if [ -d .terraform ]; then
+            echo -e "$(terraform workspace show 2>/dev/null)"
+        fi
+    fi
 }
 
 function git_prompt_minimal_info {
@@ -363,7 +373,9 @@ function chruby_version_prompt {
 }
 
 function ruby_version_prompt {
-  echo -e "$(rbfu_version_prompt)$(rbenv_version_prompt)$(rvm_version_prompt)$(chruby_version_prompt)"
+  if [[ "${THEME_SHOW_RUBY_PROMPT}" = "true" ]]; then
+    echo -e "$(rbfu_version_prompt)$(rbenv_version_prompt)$(rvm_version_prompt)$(chruby_version_prompt)"
+  fi
 }
 
 function k8s_context_prompt {
