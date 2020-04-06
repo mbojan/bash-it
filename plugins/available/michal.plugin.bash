@@ -23,3 +23,14 @@ function dimmer {
 	xrandr --output $screename --brightness $brightness_level;
 	echo -e "[info]: Screen Brightness set to" $LEVEL"%"
 }
+
+
+
+function dcss {
+	about 'Launch DCSS in tmux with wiki in background'
+	group 'michal'
+
+        tmux  \
+           new-session links http://crawl.chaosforge.org/Crawl_Wiki \; \
+           new-window crawl \; 
+}
