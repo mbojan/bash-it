@@ -146,7 +146,7 @@ function r-render {
 	param '1: name of Rmd file to render'
 	group 'r'
 
-	Rscript -e "rmarkdown::render(\"$1\")"
+	Rscript -e "rmarkdown::render(\"$1\", params=list($2) )"
 }
 
 function r-here {
