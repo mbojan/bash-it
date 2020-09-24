@@ -30,7 +30,7 @@ function dcss {
 	about 'Launch DCSS in tmux with wiki in background'
 	group 'michal'
 
-        tmux  \
+        byobu  \
            new-session links http://crawl.chaosforge.org/Crawl_Wiki \; \
            new-window crawl \; 
 }
