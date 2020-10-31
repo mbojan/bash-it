@@ -110,19 +110,19 @@ function radmin-updatep {
 # Running functions from 'devtools' and so on.
 
 
-function rpkg-autotest {
+function rpkg-autotest() {
 	about 'launch package autocheck from testthat'
 	group 'r'
 
 	Rscript -e 'testthat::auto_test_package()'
 }
 
-function rpkg-install {
+function rpkg-install() {
 	about 'run devtools::install()'
-	group r
+	group 'r'
 
 	echo 'Running devtools::install()'
-	Rscript -e 'devtools::install()'
+	Rscript -e 'devtools::install(build_vignettes=TRUE)'
 }
 
 
