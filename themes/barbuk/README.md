@@ -29,6 +29,7 @@ BARBUK_GIT_BRANCH_ICON=''
 BARBUK_HG_CHAR='☿ '
 BARBUK_SVN_CHAR='⑆ '
 BARBUK_EXIT_CODE_ICON=' '
+BARBUK_PYTHON_VENV_CHAR=' '
 ```
 
 ### Customize glyphs
@@ -83,7 +84,7 @@ chmod 400 /etc/sudoers.d/keepenv
 ### Clean
 
 ```bash
- ~ ❯ 
+ ~ ❯
 ```
 
 ### Git
@@ -96,4 +97,10 @@ chmod 400 /etc/sudoers.d/keepenv
 
 ```bash
 user@hostname in  ~/bash-it on  master ✓ ❯
+```
+
+### Python venv
+
+```bash
+  flask ~/test on  master ✓ ❯
 ```
