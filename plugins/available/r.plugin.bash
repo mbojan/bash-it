@@ -84,14 +84,6 @@ function radmin-github {
 	Rscript -e "remotes::install_github(\"$1\", build_vignettes=TRUE, force=TRUE)"
 }
 
-
-function radmin-oldpkg {
-	about 'check for old packages'
-	group 'r'
-
-	Rscript -e 'old.packages()'
-}
-
 function radmin-updatep {
 	about 'update packages in parallel'
 	group 'r'
