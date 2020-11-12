@@ -94,44 +94,7 @@ function radmin-updatep {
 
 
 
-
-
-
-# Package development
-#
-# Running functions from 'devtools' and so on.
-
-
-function rpkg-autotest() {
-	about 'launch package autocheck from testthat'
-	group 'r'
-
-	Rscript -e 'testthat::auto_test_package()'
-}
-
-function rpkg-install() {
-	about 'run devtools::install()'
-	group 'r'
-
-	echo 'Running devtools::install()'
-	Rscript -e 'devtools::install(build_vignettes=TRUE)'
-}
-
-
-
-
-
 # Other stuff
-
-function rstudio-start {
-	about 'start rstudio server'
-	group 'r'
-
-	echo 'Launch RStudio Server';
-	service rstudio-server start
-}
-
-
 
 function r-render {
 	about 'run rmarkdown::render() via Rscript'
@@ -139,12 +102,5 @@ function r-render {
 	group 'r'
 
 	Rscript -e "rmarkdown::render(\"$1\", params=list($2) )"
-}
-
-function r-here {
-	about 'cd to here:here()'
-	group 'r'
-
-	cd `Rscript -e 'cat(here::here())'`
 }
 
