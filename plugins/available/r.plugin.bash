@@ -6,7 +6,7 @@ about-plugin 'R specific functions'
 #
 # Package management and so on.
 
-radmin-update() (
+r-update() (
 	about 'update R packages with parallel compilation'
 	group 'r'
 
@@ -63,7 +63,7 @@ radmin-update() (
 	MAKE="make -j${CORES}" ${SUDO} Rscript -e "update.packages(lib=.libPaths()[${LIBINDEX}], ask=FALSE, checkBuilt=TRUE)"
 )
 
-function radmin-install {
+function r-install {
 	about 'install R package parallelled'
 	param '1: name of the package to install'
 	group 'r'
@@ -76,7 +76,7 @@ function radmin-install {
 	MAKE="make -j$USE_CORES" Rscript -e "install.packages(\"$1\")"
 }
 
-function radmin-github {
+function r-github {
 	about 'install R package from GitHub'
 	param '1: user/repo string to GH repository with the package'
 	group 'r'
@@ -84,17 +84,6 @@ function radmin-github {
 	Rscript -e "remotes::install_github(\"$1\", build_vignettes=TRUE, force=TRUE)"
 }
 
-function radmin-updatep {
-	about 'update packages in parallel'
-	group 'r'
-
-	Rscript -e 'update.packages(lib=.libPaths()[1], ask=FALSE, Ncpus=4)'
-}
-
-
-
-
-# Other stuff
 
 function r-render {
 	about 'run rmarkdown::render() via Rscript'
