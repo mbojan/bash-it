@@ -42,5 +42,6 @@ function cddab {
         byobu  \
            new-session links http://cddawiki.chezzo.com/cdda_wiki/index.php?title=Main_Page \; \
            new-window links http://cdda.chezzo.com/ \; \
+	   new-window links https://cddawiki.chezzo.com/cdda_wiki/index.php?title=A_Skill_Training_Encyclopedia \; \
            new-window cdda \; 
 }
