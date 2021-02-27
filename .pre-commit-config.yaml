@@ -3,11 +3,13 @@
 ---
 # fail_fast: true
 minimum_pre_commit_version: 1.18.1
+exclude: "docs/_build/"
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v2.3.0
     hooks:
       - id: trailing-whitespace
+        exclude: ".(md|rst)$"
       - id: end-of-file-fixer
       - id: check-merge-conflict
       - id: mixed-line-ending
@@ -26,3 +28,18 @@ repos:
       # - id: forbid-crlf
       - id: remove-crlf
         exclude: ".bat$"
+  - repo: local
+    hooks:
+      - id: dot-sh
+        name: Check .sh files against bash-it requirements
+        entry: ./hooks/dot-sh.sh
+        language: system
+        files: "\\.sh$"
+        types: [file]
+      - id: dot-bash
+        name: Check .bash files against bash-it requirements
+        exclude: "test/test_helper.bash"
+        entry: ./hooks/dot-bash.sh
+        language: system
+        files: "\\.bash$"
+        types: [file]
